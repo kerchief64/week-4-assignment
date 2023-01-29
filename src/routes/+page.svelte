@@ -68,7 +68,8 @@ If your get the following error, ignore it and refresh the page!!!!
       case 3:
         /* 
 
-        [Challenge 1]: 
+        [Challenge 1]:
+        WARNING: DO CHALLENGE 2, 3, AND 4 BEFORE STARTING THIS ONE.
         Reassign and Filter through the `galleryImages` so that only images not selected for deletion are left.
 
         */
