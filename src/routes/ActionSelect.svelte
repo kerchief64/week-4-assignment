@@ -30,14 +30,14 @@
     [Challenge]:
     Make the dropdown input bind to the `selected` prop
   -->
-  <select>
+  <select bind:value={selected}>
     {#each editOptions as editOption}
-      <option value="{editOption}">{editOption.text}</option>
+      <option  value="{editOption}">{editOption.text}</option>
     {/each}
   </select>
 
   {#if actionButtonText}
-    <input type="submit" id="submit_button" value="{actionButtonText}">
+    <input  type="submit" id="submit_button" value="{actionButtonText}">
   {/if}
 </form>
 

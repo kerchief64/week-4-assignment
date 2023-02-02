@@ -18,6 +18,7 @@ If your get the following error, ignore it and refresh the page!!!!
 
 	import ActionSelect from "./ActionSelect.svelte";
   import AddImage from "./AddImage.svelte";
+	import CustomImage from "./CustomImage.svelte";
 
   let selectedEditOption;
   let galleryImages = [];
@@ -63,7 +64,7 @@ If your get the following error, ignore it and refresh the page!!!!
         if (files === undefined) return;
 
         // Create a new array of files with both the old and new
-        galleryImages = createImageObject(files);   
+        galleryImages = createImageObject(files);
         break;
       case 3:
         /* 
@@ -73,6 +74,8 @@ If your get the following error, ignore it and refresh the page!!!!
         Reassign and Filter through the `galleryImages` so that only images not selected for deletion are left.
 
         */
+
+        galleryImages = galleryImages.filter(x => x.selected === false)
         console.log("Remove button was pushed");
         break;
     }
@@ -90,7 +93,7 @@ If your get the following error, ignore it and refresh the page!!!!
     [Challenge 2]:
     Bind the `selected` prop inside the ActionSelect component to `selectedEditOption`
   -->
-<ActionSelect on:submit="{handleEditSelect}"/>
+  <ActionSelect bind:selected={selectedEditOption} on:submit="{handleEditSelect}"/>
 
 <!-- 
   Make sure `sellectedEditOption` is defined before doing anything
@@ -120,7 +123,7 @@ If your get the following error, ignore it and refresh the page!!!!
               Bind each checkbox and it's sibling image (myImg) together via the `selected` object field
               which is held by each myImg 
             -->
-          <input type="checkbox" style="width: 50px; height: 50px;">
+          <input type="checkbox" bind:checked={myImg.selected} style="width: 50px; height: 50px;">
           <br>
         {/if}
         <!-- Display the image -->
@@ -137,7 +140,7 @@ If your get the following error, ignore it and refresh the page!!!!
           Once this is working, use the `onDestroy` life cycle hook in the "CustomImage" component.
           Inside the life cycle hook, run the following code: `console.log("An image was deleted")`
         -->
-        <img src="{URL.createObjectURL(myImg.image)}" width="{myImg.width}px" height="{myImg.height}px" alt="Gallery">
+        <CustomImage src={URL.createObjectURL(myImg.image)} width={myImg.width} height={myImg.height} selected={myImg.selected} />
          <!-- 
               !! [Super Challenge] !!
               Use the `.markedForDelete` class on the "CustomImage" components.
@@ -147,8 +150,3 @@ If your get the following error, ignore it and refresh the page!!!!
     {/if}
 {/if}
 
-<style>
-  .markedForDelete {
-    opacity: 50%;
-  }
-</style>
